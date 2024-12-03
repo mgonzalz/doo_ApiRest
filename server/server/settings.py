@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework', # App de RESTful API.
+    'corsheaders', # App de CORS - para la comunicación entre el frontend y el backend.
 
     'authentication', # App de autenticación.
 ]
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # Middleware de CORS.
 ]
 
 ROOT_URLCONF = 'server.urls'
@@ -129,3 +131,14 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Configuración de CORS
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',  # URL del frontend.
+]
+
+CORS_ALLOW_CREDENTIALS = True  # Permitir el envío de cookies y credenciales.
+
+SESSION_COOKIE_SAMESITE = 'None'  # Necesario para solicitudes cross-origin.
+SESSION_COOKIE_SECURE = False  # Establecer a True si usas HTTPS en producción.
